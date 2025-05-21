@@ -1,5 +1,5 @@
-import { ShopList } from './components/ShopList/ShopList';
+import { ShopListWrapper } from './components/ShopList/ShopListWrapper';
 
 export const App = () => {
-  return <ShopList />;
+  return <ShopListWrapper />;
 };
