@@ -4,7 +4,7 @@ import type { Shop } from './ShopList';
 const shops: Shop[] = [
   {
     id: '1',
-    address: 'Jana Pawła 2 66-666, Krakow',
+    address: 'Jana Pawła 2 66-666, Kraków',
     imageUrl:
       'https://www.dotactiv.com/hs-fs/hubfs/Small%20Retailers_Shelf_PlaceHolder.jpg?width=300&name=Small%20Retailers_Shelf_PlaceHolder.jpg',
     type: 'FRANCHISE',
@@ -18,7 +18,7 @@ const shops: Shop[] = [
   },
   {
     id: '3',
-    address: 'Jana Pawła 2 66-666, Krakow',
+    address: 'Jana Pawła 2 66-666, Kraków',
     imageUrl:
       'https://www.dotactiv.com/hs-fs/hubfs/Small%20Retailers_Shelf_PlaceHolder.jpg?width=300&name=Small%20Retailers_Shelf_PlaceHolder.jpg',
     type: 'FRANCHISE',
