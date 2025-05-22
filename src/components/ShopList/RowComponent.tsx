@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import type { Shop } from './ShopList';
-import { parseAddress } from './parseAddress';
+import { parseAddress } from './utilities/parseAddress';
 
 interface RowComponentProps {
   shop: Shop;
@@ -27,6 +27,7 @@ export const RowComponent = ({ shop, style }: RowComponentProps) => {
         alt={shop.address}
         className="mb-4 h-40 w-full rounded-lg bg-[#334155] object-cover"
         loading="lazy"
+        // <Suspense> is not needed for image lazy loading. current approach (react-window already virtualizes this list) is optimal for performance and user experience.
       />
       <div className="w-full">
         <div className="mb-2 flex justify-between">
