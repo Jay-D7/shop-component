@@ -11,11 +11,11 @@ export type Shop = {
   type: 'FRANCHISE' | 'REGULAR';
 };
 
-interface ShopListProps {
+type ShopListProps = {
   shops: Shop[];
   // loading?: boolean;
   // error?: string || null;
-}
+};
 
 export const ShopList = ({ shops }: ShopListProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -46,9 +46,9 @@ export const ShopList = ({ shops }: ShopListProps) => {
   const Cell = ({ columnIndex, rowIndex, style }: GridChildComponentProps) => {
     const index = rowIndex * columnCount + columnIndex;
     if (index >= shops.length) return null;
-    // Add padding to each cell for spacing
+
     return (
-      <div style={{ ...style, padding: 8, boxSizing: 'border-box' }}>
+      <div className="shop-list-grid" style={style}>
         <RowComponent
           shop={shops[index]}
           style={{ width: '100%', height: '100%' }}
@@ -58,12 +58,7 @@ export const ShopList = ({ shops }: ShopListProps) => {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="mx-auto box-border min-h-screen w-full max-w-6xl flex-col items-center"
-      // Get rid of scroll if want
-      // overflow-x-hidden"
-    >
+    <div ref={containerRef} className="grid-container">
       <Grid
         columnCount={columnCount}
         rowCount={rowCount}

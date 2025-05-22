@@ -3,49 +3,47 @@ import { useEffect } from 'react';
 import type { Shop } from './ShopList';
 import { parseAddress } from './utilities/parseAddress';
 
-interface RowComponentProps {
+type RowComponentProps = {
   shop: Shop;
   style?: React.CSSProperties;
-}
+};
 
 export const RowComponent = ({ shop, style }: RowComponentProps) => {
   const { street, city } = parseAddress(shop.address);
   // Test parseAddress runs in the browser and check if React.window working
   useEffect(() => {
-    console.log(parseAddress('Oxford street 66-666, London'));
+    // console.log(parseAddress('Oxford street 66-666, London'));
   }, []);
 
   return (
     <li
       key={shop.id}
       style={style}
-      className="mx-auto flex max-w-sm flex-col items-center rounded-xl border border-[#334155] bg-[#1e293b] p-6 shadow-xl transition-colors duration-300 hover:bg-amber-800 hover:shadow-2xl"
+      className="shop-card"
       data-testid="shop-item"
     >
       <img
         src={shop.imageUrl}
-        alt={shop.address}
-        className="mb-4 h-40 w-full rounded-lg bg-[#334155] object-cover"
+        alt={`Shop at ${street}, ${city}`}
+        className="shop-image"
         loading="lazy"
         // <Suspense> is not needed for image lazy loading. current approach (react-window already virtualizes this list) is optimal for performance and user experience.
       />
       <div className="w-full">
         <div className="mb-2 flex justify-between">
-          <span className="text-xs text-gray-400">ID: {shop.id}</span>
+          <span className="shop-id">ID: {shop.id}</span>
           <span
-            className={`rounded-full px-3 py-1 text-xs font-semibold ${
+            className={`shop-type ${
               shop.type === 'FRANCHISE'
-                ? 'bg-blue-900 text-blue-300'
-                : 'bg-green-900 text-green-300'
+                ? 'shop-type-franchise'
+                : 'shop-type-regular'
             }`}
           >
             {shop.type}
           </span>
         </div>
-        <p className="mb-2 text-right text-gray-400">{`${street}, ${city}`}</p>
-        <button className="w-full rounded bg-gradient-to-r from-blue-700 to-blue-500 px-4 py-2 font-semibold text-white transition-colors hover:from-blue-600 hover:to-blue-400">
-          Add to Cart
-        </button>
+        <p className="shop-address">{`${street}, ${city}`}</p>
+        <button className="shop-button">Add to Cart</button>
       </div>
     </li>
   );
