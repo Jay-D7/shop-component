@@ -1,12 +1,16 @@
 import { ShopList } from './components/ShopList/ShopList';
 import './components/ShopList/ShopList.css';
 import { ShopListWrapper } from './components/ShopList/ShopListWrapper';
-import { mockShops } from './components/ShopList/utilities/mockShops';
+
+// import { mockShops } from './components/ShopList/utilities/mockShops';
+// shops={mockShops()}
 
 export const App = () => {
   return (
     <ShopListWrapper>
-      <ShopList shops={mockShops()} />
+      {({ shops, loading, error }) => (
+        <ShopList shops={shops} loading={loading} error={error} />
+      )}
     </ShopListWrapper>
   );
 };

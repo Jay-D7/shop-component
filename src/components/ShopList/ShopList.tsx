@@ -13,8 +13,8 @@ export type Shop = {
 
 type ShopListProps = {
   shops: Shop[];
-  // loading?: boolean;
-  // error?: string || null;
+  loading?: boolean;
+  error?: string | null;
 };
 
 export const ShopList = ({ shops }: ShopListProps) => {
