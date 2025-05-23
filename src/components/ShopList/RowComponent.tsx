@@ -22,13 +22,15 @@ export const RowComponent = ({ shop, style }: RowComponentProps) => {
       className="shop-card"
       data-testid="shop-item"
     >
-      <img
-        src={shop.imageUrl}
-        alt={`Shop at ${street}, ${city}`}
-        className="shop-image"
-        loading="lazy"
-        // <Suspense> is not needed for image lazy loading. current approach (react-window already virtualizes this list) is optimal for performance and user experience.
-      />
+      {shop.imageUrl && (
+        <img
+          src={shop.imageUrl}
+          alt={`Shop at ${street}, ${city}`}
+          className="shop-image"
+          loading="lazy"
+          // <Suspense> is not needed for image lazy loading. current approach (react-window already virtualizes this list) is optimal for performance and user experience.
+        />
+      )}
       <div className="w-full">
         <div className="mb-2 flex justify-between">
           <span className="shop-id">ID: {shop.id}</span>
