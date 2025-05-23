@@ -21,7 +21,7 @@ export const ShopListWrapper = ({ children }: shopListWrapperProps) => {
     setError(null);
     setTimeout(() => {
       try {
-        setShops(mockShops(1000)); // <-- use mockShops here
+        setShops(mockShops(1000)); // mockShops
         setLoading(false);
       } catch {
         setError('Failed to load shops.');
@@ -36,17 +36,13 @@ export const ShopListWrapper = ({ children }: shopListWrapperProps) => {
         <span className="handler-text">Loading shops...</span>
       </div>
     );
-  }
-
-  if (error === 'Failed to load shops.') {
+  } else if (error === 'Failed to load shops.') {
     return (
       <div className="error-handler">
         <span className="handler-text-error">{error}</span>
       </div>
     );
-  }
-
-  if (!shops.length) {
+  } else if (!shops.length) {
     return (
       <div className="error-handler">
         <span className="handler-text">No shops found.</span>
