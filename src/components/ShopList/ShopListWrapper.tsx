@@ -36,13 +36,17 @@ export const ShopListWrapper = ({ children }: shopListWrapperProps) => {
         <span className="handler-text">Loading shops...</span>
       </div>
     );
-  } else if (error === 'Failed to load shops.') {
+  }
+
+  if (error === 'Failed to load shops.') {
     return (
       <div className="error-handler">
         <span className="handler-text-error">{error}</span>
       </div>
     );
-  } else if (!shops.length) {
+  }
+
+  if (!shops.length) {
     return (
       <div className="error-handler">
         <span className="handler-text">No shops found.</span>
