@@ -14,7 +14,13 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Example: split vendor code
-          vendor: ['react', 'react-dom', 'react-router-dom'],
+          vendor: [
+            'react',
+            'react-dom',
+            'react-window',
+            '@testing-library/react',
+            '@testing-library/jest-dom',
+          ],
         },
       },
     },

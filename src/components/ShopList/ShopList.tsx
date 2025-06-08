@@ -1,27 +1,86 @@
-export const ShopList = () => {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
-        <h2 className="text-2xl font-bold mb-4">Shop Component</h2>
-        <p className="text-gray-700 mb-4">
-          This is a simple shop component built with React and Tailwind CSS.
-        </p>
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-lg font-semibold">$19.99</span>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Add to Cart
-          </button>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-gray-600">In Stock</span>
-          <span className="text-gray-600">Qty: 1</span>
-        </div>
-        <div className="mt-4">
-          <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-            <p className="text-white-600">Checkout</p>
-          </button>
-        </div>
+import { useLayoutEffect, useRef, useState } from 'react';
+import { FixedSizeGrid as Grid } from 'react-window';
+import type { GridChildComponentProps } from 'react-window';
+
+import { RowComponent } from './RowComponent';
+
+export type ShopType = 'FRANCHISE' | 'REGULAR';
+
+export type Shop = {
+  id: string;
+  address: string;
+  imageUrl: string;
+  type: ShopType;
+};
+
+type ShopListProps = {
+  shops: Shop[];
+  loading?: boolean;
+  error?: string | null;
+};
+
+export const ShopList = ({ shops }: ShopListProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(1200);
+
+  // Responsive: update container width on resize
+  useLayoutEffect(() => {
+    function updateWidth() {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth);
+      }
+    }
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
+
+  // Responsive columns
+  let columnCount = 1;
+  if (containerWidth > 1024) columnCount = 3;
+  else if (containerWidth > 640) columnCount = 2;
+
+  const itemWidth = Math.floor(containerWidth / columnCount);
+  const gridWidth = itemWidth * columnCount;
+  const itemHeight = 340; // Adjust based on your card height
+  const rowCount = Math.ceil(shops.length / columnCount);
+
+  const Cell = ({ columnIndex, rowIndex, style }: GridChildComponentProps) => {
+    const index = rowIndex * columnCount + columnIndex;
+    if (index >= shops.length) return null;
+
+    return (
+      <div className="shop-list-grid" style={style}>
+        <RowComponent
+          shop={shops[index]}
+          style={{ width: '100%', height: '100%' }}
+        />
       </div>
+    );
+  };
+
+  return (
+    <div ref={containerRef} className="grid-container">
+      <Grid
+        columnCount={columnCount}
+        rowCount={rowCount}
+        columnWidth={itemWidth}
+        rowHeight={itemHeight}
+        height={Math.min(itemHeight * rowCount, 800)}
+        width={gridWidth + 16}
+        outerElementType="ul"
+      >
+        {Cell}
+      </Grid>
     </div>
   );
 };
+
+// Switch to using react-window for performance with long lists, Don't use .map()
+// Version before react-window
+// return (
+//   // <ul>
+//   // {shops.map((shop) => {
+//   // <li> Content </li>
+//   // </lul>
+// )
