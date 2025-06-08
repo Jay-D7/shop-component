@@ -4,11 +4,13 @@ import type { GridChildComponentProps } from 'react-window';
 
 import { RowComponent } from './RowComponent';
 
+export type ShopType = 'FRANCHISE' | 'REGULAR';
+
 export type Shop = {
   id: string;
   address: string;
   imageUrl: string;
-  type: 'FRANCHISE' | 'REGULAR';
+  type: ShopType;
 };
 
 type ShopListProps = {

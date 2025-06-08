@@ -1,3 +1,4 @@
+import gtrImage from '../../../assets/gtr_300x300.jpg';
 import type { Shop } from './../ShopList';
 
 function randomType(): 'FRANCHISE' | 'REGULAR' {
@@ -11,8 +12,7 @@ export const mockShops = (count: number = 1000): Shop[] => {
       i % 2 === 0
         ? 'Jana Pawła 2 66-666, Kraków'
         : 'Oxford Street 00-001, Warsaw',
-    imageUrl:
-      'https://www.dotactiv.com/hs-fs/hubfs/Small%20Retailers_Shelf_PlaceHolder.jpg?width=300',
+    imageUrl: gtrImage,
     type: randomType(),
   }));
 };
