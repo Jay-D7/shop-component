@@ -21,7 +21,8 @@ export const ShopListWrapper = ({ children }: shopListWrapperProps) => {
     setError(null);
     setTimeout(() => {
       try {
-        setShops(mockShops(1000)); // mockShops
+        // throw new Error('fail'); // Force an error
+        setShops(mockShops(1000)); // mockShops()
         // Change the number to test the performance of list
         setLoading(false);
       } catch {
